@@ -8,13 +8,21 @@ import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
+import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 
 class MainActivity : AppCompatActivity() {
+    private val menu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        menu.showBadge(R.id.bottom_user, 1)
+        menu.showBadge(R.id.bottom_chat, 53)
+//        menu.showBadge(R.id.bottom_more)
+
+        naviEventHandle()
     }
 
     // 액션바에 액션 추가
@@ -50,6 +58,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun naviEventHandle() {
+        menu.setOnItemSelectedListener { id ->
+            val ft = supportFragmentManager.beginTransaction()
+            when (id) {
+                R.id.bottom_user -> {
+                    println("bottom_user")
+                    ft.replace(R.id.frame_layout, Users()).commit()
+                }
+                R.id.bottom_chat -> {
+                    println("bottom_chat")
+                    ft.replace(R.id.frame_layout, Chats()).commit()
+                }
+                R.id.bottom_news -> {
+                    println("bottom_news")
+                    ft.replace(R.id.frame_layout, News()).commit()
+                }
+                R.id.bottom_more -> {
+                    println("bottom_more")
+                    ft.replace(R.id.frame_layout, Mores()).commit()
+                }
+            }
+        }
+    }
+
+    fun fragmentChange() {
+
     }
 
 }

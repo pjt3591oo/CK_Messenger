@@ -6,14 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <android.support.design.widget.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:itemBackground="@color/colorPrimary"-->
+<!--        app:itemIconTint="@color/bottom_section_color"-->
+<!--        app:itemTextColor="@color/bottom_section_color"-->
+<!--        app:layout_behavior="tech.thdev.app.view.BottomNavigationBehavior"-->
+<!--        app:menu="@menu/bottom_nav"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="719dp" />-->
+    <!--        app:itemTextColor="@drawable/bottombar_check"-->
+    <!--        app:itemIconTint="@drawable/bottombar_check"-->
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cnb_iconSize="24dp"
+        app:cnb_menuResource="@menu/bottom_nav"
+        app:cnb_orientationMode="horizontal"
+        app:cnb_radius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints"
+    />
+
+    <!--        app:cnb_textAppearance="?myThemeTextAppearance"-->
+<!--    app:cnb_unselectedColor="@color/my_menu_unselected_color"-->
+<!--    app:cnb_badgeColor="@color/my_menu_badge_color"-->
 </androidx.constraintlayout.widget.ConstraintLayout>
