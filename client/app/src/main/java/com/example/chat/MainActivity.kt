@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 //        menu.showBadge(R.id.bottom_more)
 
         naviEventHandle()
+        menu.setItemSelected(R.id.bottom_user)
     }
 
     // 액션바에 액션 추가
