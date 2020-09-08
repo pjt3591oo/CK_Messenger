@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 //        menu.showBadge(R.id.bottom_user, 1)
         menu.showBadge(R.id.bottom_chat, 53)
 //        menu.showBadge(R.id.bottom_more)
-
         naviEventHandle()
         menu.setItemSelected(R.id.bottom_user)
     }
