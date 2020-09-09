@@ -15,13 +15,14 @@ class FriendsSerializer(serializers.Serializer):
   friend_id = serializers.IntegerField()
   
   friend = UserSerializer(many=False, read_only=True)
+  user = UserSerializer(many=False, read_only=True)
 
   # friend_id = serializers.RelatedField(source=settings.AUTH_USER_MODEL, read_only=True)
   # user_id = serializers.RelatedField(source=settings.AUTH_USER_MODEL, read_only=True)
 
   class Meta:
     model = Friends
-    fields = ['id', 'created', 'stats', 'user_id', 'friend_id', 'friend']
+    fields = ['id', 'created', 'stats', 'user_id', 'friend_id', 'friend', 'user']
 
   def create(self, validated_data):
     print(validated_data)

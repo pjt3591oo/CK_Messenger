@@ -30,7 +30,7 @@ $ python manage.py startapp [앱이름]
 ```
 
 
-```
+```sh
 $ docker run -p 3306:3306 --name clone_kakao -e MYSQL_ROOT_PASSWORD=password -d mysql:5.7 mysqld
 
 $ docker exec -it clone_kakao /bin/bash

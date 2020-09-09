@@ -31,11 +31,15 @@ class User(AbstractUser):
         max_length=255,
         unique=True,
     )
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    
     birth = models.DateField()
     gender = models.CharField(max_length=2)
     profile_img = models.TextField()
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+
+    msg = models.CharField(max_length=255, default="")
+    subscribe = models.CharField(max_length=255, default="")
 
     objects = UserManager()
 
