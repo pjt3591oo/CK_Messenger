@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBar
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 
+
 class MainActivity : AppCompatActivity() {
     private val menu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 //        menu.showBadge(R.id.bottom_more)
         naviEventHandle()
         menu.setItemSelected(R.id.bottom_user)
+
     }
 
     // 액션바에 액션 추가
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity() {
     fun naviEventHandle() {
         menu.setOnItemSelectedListener { id ->
             val ft = supportFragmentManager.beginTransaction()
+            Log.i("[NAVI CHANGE]", id.toString())
             when (id) {
                 R.id.bottom_user -> {
                     println("bottom_user")
