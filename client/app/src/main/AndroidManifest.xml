@@ -22,6 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MyProfileActivity"
+            android:theme="@style/AppTheme"
+            android:label="my profile"
+        />
+
+
+        <activity
+            android:name=".FriendProfileActivity"
+            android:theme="@style/AppTheme"
+            android:label="friend profile"
+        />
+
     </application>
 
 </manifest>
