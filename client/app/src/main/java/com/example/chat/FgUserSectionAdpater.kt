@@ -36,13 +36,13 @@ class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        Glide.with(holder.img.getContext()).load(friendList.get(position).friend.profile_img).into(holder.img)
-        holder.name.text = friendList.get(position).friend.email
-        holder.msg.text = friendList.get(position).friend.msg
-        holder.sub.text = friendList.get(position).friend.subscribe
+        Glide.with(holder.img.context).load(friendList[position].friend.profile_img).into(holder.img)
+        holder.name.text = friendList[position].friend.email
+        holder.msg.text = friendList[position].friend.msg
+        holder.sub.text = friendList[position].friend.subscribe
 
         holder.view.setOnClickListener {
-            val isMyProfile: Boolean = friendList.get(position).id == 1
+            val isMyProfile: Boolean = friendList[position].id == 1
 
             var movedIntent: Intent = if (isMyProfile) {
                 Intent(it.context, MyProfileActivity::class.java)

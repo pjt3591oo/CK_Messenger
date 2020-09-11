@@ -22,8 +22,6 @@ class FgUserAdapter(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
-        var view: View
-
         if (viewType == 0) {
             var view: View = LayoutInflater.from(parent.context).inflate(R.layout.my_by_fg_user, parent, false)
             return FgUserAdapter.MyViewHolder(view)
@@ -33,14 +31,9 @@ class FgUserAdapter(
         }
     }
 
+    override fun getItemCount(): Int { return friendList.size }
 
-    override fun getItemCount(): Int {
-        return friendList.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
+    override fun getItemViewType(position: Int): Int { return position }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val friend: ArrayList<Friend> = friendList.get(position)
