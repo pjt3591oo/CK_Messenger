@@ -24,15 +24,16 @@ class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adap
     ): FgUserSectionAdpater.CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fg_user_section_profile, parent, false)
 
-        return FgUserSectionAdpater.CustomViewHolder(view).apply {
-
-        }
+        return FgUserSectionAdpater.CustomViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return friendList.size
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return friendList.get(position).id
+    }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         Glide.with(holder.img.getContext()).load(friendList.get(position).friend.profile_img).into(holder.img)
@@ -41,9 +42,15 @@ class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adap
         holder.sub.text = friendList.get(position).friend.subscribe
 
         holder.view.setOnClickListener {
-            var i = Intent(it.context, MyProfileActivity::class.java)
-            it.context.startActivity(i)
+            val isMyProfile: Boolean = friendList.get(position).id == 1
 
+            var movedIntent: Intent = if (isMyProfile) {
+                Intent(it.context, MyProfileActivity::class.java)
+            } else {
+                Intent(it.context, FriendProfileActivity::class.java)
+            }
+
+            it.context.startActivity(movedIntent)
         }
     }
 

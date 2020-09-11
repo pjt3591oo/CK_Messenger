@@ -1,5 +1,7 @@
 package com.example.chat
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +29,12 @@ class FgChatAdapter(val roomList: ArrayList<Room>): RecyclerView.Adapter<FgChatA
         holder.datetime.text = roomList.get(position).datetime
         holder.joinedCnt.text = roomList.get(position).joinedCnt.toString()
         holder.chatCnt.text = roomList.get(position).chatCnt.toString()
+
+        holder.view.setOnClickListener {
+            Log.i("[VIEW]", "Open ?")
+            var i = Intent(it.context, ChatActivity::class.java)
+            it.context.startActivity(i)
+        }
     }
 
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -37,5 +45,7 @@ class FgChatAdapter(val roomList: ArrayList<Room>): RecyclerView.Adapter<FgChatA
 
         val joinedCnt = itemView.findViewById<TextView>(R.id.chat_join_cnt)
         val chatCnt = itemView.findViewById<TextView>(R.id.chat_msg_cnt)
+
+        val view:View = itemView
     }
 }

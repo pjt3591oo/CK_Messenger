@@ -36,6 +36,12 @@
             android:label="friend profile"
         />
 
+        <activity
+            android:name=".ChatActivity"
+            android:theme="@style/AppTheme"
+            android:label="Chatting"
+            />
+
     </application>
 
 </manifest>

@@ -27,23 +27,12 @@ class MyProfileActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                // app icon in action bar clicked; go home
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun finish() {
         super.finish()
         closeAnimation()
     }
 
-    fun closeAnimation() {
+    private fun closeAnimation() {
         overridePendingTransition( R.anim.slide_out_static, R.anim.slide_out_bottom );
     }
 }

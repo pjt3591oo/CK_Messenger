@@ -13,17 +13,17 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar
 
 
 class MainActivity : AppCompatActivity() {
-    private val menu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
+    private val bottomMenu by lazy { findViewById<ChipNavigationBar>(R.id.bottom_menu) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 //        menu.showBadge(R.id.bottom_user, 1)
-        menu.showBadge(R.id.bottom_chat, 53)
+        bottomMenu.showBadge(R.id.bottom_chat, 53)
 //        menu.showBadge(R.id.bottom_more)
         naviEventHandle()
-        menu.setItemSelected(R.id.bottom_user)
+        bottomMenu.setItemSelected(R.id.bottom_user)
 
     }
 
@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     // 액션바 이벤트
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val num:String = item.itemId.toString()
+
         when(item.itemId) {
             R.id.action_search -> {
                 Log.d("action_search", num)
@@ -63,32 +64,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun naviEventHandle() {
-        menu.setOnItemSelectedListener { id ->
+        bottomMenu.setOnItemSelectedListener { id ->
             val ft = supportFragmentManager.beginTransaction()
-            Log.i("[NAVI CHANGE]", id.toString())
+            val actionBar: ActionBar? = supportActionBar
+
+
             when (id) {
                 R.id.bottom_user -> {
-                    println("bottom_user")
+                    actionBar?.title = "친구" // 액션바 타이틀
                     ft.replace(R.id.frame_layout, Users()).commit()
                 }
                 R.id.bottom_chat -> {
                     println("bottom_chat")
+                    actionBar?.title = "채팅" // 액션바 타이틀
                     ft.replace(R.id.frame_layout, Chats()).commit()
                 }
                 R.id.bottom_news -> {
-                    println("bottom_news")
+                    actionBar?.title = "" // 액션바 타이틀
                     ft.replace(R.id.frame_layout, News()).commit()
                 }
                 R.id.bottom_more -> {
-                    println("bottom_more")
+                    actionBar?.title = "더보기" // 액션바 타이틀
                     ft.replace(R.id.frame_layout, Mores()).commit()
                 }
             }
         }
     }
-
-    fun fragmentChange() {
-
-    }
-
 }
