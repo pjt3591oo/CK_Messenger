@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.chat.API.Friend
 
 class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adapter<FgUserSectionAdpater.CustomViewHolder>() {
@@ -36,7 +38,11 @@ class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        Glide.with(holder.img.context).load(friendList[position].friend.profile_img).into(holder.img)
+        Glide
+            .with(holder.img.context)
+            .load(friendList[position].friend.profile_img)
+            .transform(CenterCrop(), RoundedCorners(50))
+            .into(holder.img)
         holder.name.text = friendList[position].friend.email
         holder.msg.text = friendList[position].friend.msg
         holder.sub.text = friendList[position].friend.subscribe

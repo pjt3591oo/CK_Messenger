@@ -5,7 +5,7 @@
     android:id="@+id/chat_menu_layout_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C0D0DB"
+    android:background="#454752"
     tools:context=".ChatActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                 android:inputType="textPersonName" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_send_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

@@ -11,6 +11,7 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#454752"
         app:layout_constraintBottom_toTopOf="@+id/bottom_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         app:cnb_menuResource="@menu/bottom_nav"
         app:cnb_orientationMode="horizontal"
         app:cnb_radius="0dp"
+        android:background="#454752"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
     />

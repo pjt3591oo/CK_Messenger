@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun naviEventHandle() {
+    private fun naviEventHandle() {
         bottomMenu.setOnItemSelectedListener { id ->
             val ft = supportFragmentManager.beginTransaction()
             val actionBar: ActionBar? = supportActionBar

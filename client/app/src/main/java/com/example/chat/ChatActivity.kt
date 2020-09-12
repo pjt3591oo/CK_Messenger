@@ -34,22 +34,63 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         var chats: ArrayList<Msg> = ArrayList<Msg>()
 
-        chats.add(Msg(1, "안녕하세요", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:00:11"))
-        chats.add(Msg(2, "반갑습니다", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "09:00:11"))
-        chats.add(Msg(3, "반가워요~", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:01:11"))
-        chats.add(Msg(4, "오늘 날씨가 좋네요", 1, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "13:00:11"))
-        chats.add(Msg(5, "안녕하세요", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:00:11"))
-        chats.add(Msg(6, "반갑습니다", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "09:00:11"))
-        chats.add(Msg(7, "반가워요~", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:01:11"))
-        chats.add(Msg(8, "오늘 날씨가 좋네요", 1, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "13:00:11"))
-        chats.add(Msg(9, "안녕하세요", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:00:11"))
-        chats.add(Msg(10, "반갑습니다", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "09:00:11"))
-        chats.add(Msg(11, "반가워요~", 2, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",1, "17:01:11"))
-        chats.add(Msg(12, "오늘 날씨가 좋네요", 1, "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo",0, "13:00:11"))
+        val texsImg:String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
+        val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
+
+        chats.add(Msg(3, "반가워요~", "text",1, senderImg,1, "17:01:11"))
+        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(2, texsImg, "img",1, senderImg,0, "09:00:11"))
+        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
+        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 2, senderImg,0, "13:00:11"))
+        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
+        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
+        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
+        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
+        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
+        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
+        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
 
         rv_chats.setHasFixedSize(true)
         rv_chats.layoutManager = LinearLayoutManager(this)
-        rv_chats.adapter = ChatAdapter(chats)
+        var chatAdapter = ChatAdapter(chats, this)
+        rv_chats.adapter = chatAdapter
+
+        rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+
+        iv_send_chat.setOnClickListener {
+            chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+            chatAdapter.notifyItemInserted(chatAdapter.itemCount)
+
+            rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+        }
+
     }
 
     override fun finish() {

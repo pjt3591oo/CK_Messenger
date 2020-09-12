@@ -15,7 +15,6 @@ class FgUserAdapter(
     val activity: FragmentActivity,
     val friendList : ArrayList<ArrayList<Friend>>,
     val nameList   : ArrayList<String>
-
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(
