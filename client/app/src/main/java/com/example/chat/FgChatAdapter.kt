@@ -24,15 +24,16 @@ class FgChatAdapter(val roomList: ArrayList<Room>): RecyclerView.Adapter<FgChatA
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.name.text = roomList.get(position).name
-        holder.lastMsg.text = roomList.get(position).lastMsg
-        holder.datetime.text = roomList.get(position).datetime
-        holder.joinedCnt.text = roomList.get(position).joinedCnt.toString()
-        holder.chatCnt.text = roomList.get(position).chatCnt.toString()
+        holder.name.text = roomList[position].name
+        holder.lastMsg.text = roomList[position].lastMsg
+        holder.datetime.text = roomList[position].datetime
+        holder.joinedCnt.text = roomList[position].joinedCnt.toString()
+        holder.chatCnt.text = roomList[position].chatCnt.toString()
 
         holder.view.setOnClickListener {
             Log.i("[VIEW]", "Open ?")
             var i = Intent(it.context, ChatActivity::class.java)
+            i.putExtra("roomName", roomList[position].name)
             it.context.startActivity(i)
         }
     }

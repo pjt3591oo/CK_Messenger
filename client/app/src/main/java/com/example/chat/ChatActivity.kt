@@ -15,6 +15,7 @@ import com.example.chat.API.Msg
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
 
+
 class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,8 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 
-        actionBar?.title = "멍개씌~" // 액션바 타이틀
+        val intent = intent
+        actionBar?.title = intent.extras?.getString("roomName") // 액션바 타이틀
 
         overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_static );
 
@@ -93,7 +95,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
                 rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
                 et_msg_for_send.setText("")
-//                et_msg_for_send.clearFocus()
             }
         }
 
@@ -107,31 +108,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 }, 100)
             }
         })
-
-//        rv_chats.setOnClickListener {
-//            et_msg_for_send.clearFocus()
-//        }
-//        iv_etcs_send.setOnClickListener {
-//            et_msg_for_send.clearFocus()
-//        }
-//
-//        // editText 포커스 해제
-//        et_msg_for_send.onFocusChangeListener =
-//            View.OnFocusChangeListener { view, hasFocus ->
-//                if (hasFocus) {
-//                } else {
-//                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//                    imm.hideSoftInputFromWindow(et_msg_for_send.windowToken, 0)
-//                }
-//
-//                rv_chats.postDelayed(
-//                    Runnable {
-//                        rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
-//                    },
-//                    100
-//                )
-//            }
-
     }
 
     override fun finish() {
