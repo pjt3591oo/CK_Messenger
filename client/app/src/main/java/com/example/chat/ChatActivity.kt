@@ -1,11 +1,11 @@
 package com.example.chat
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +37,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val texsImg:String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
         val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
 
-        chats.add(Msg(3, "반가워요~", "text",1, senderImg,1, "17:01:11"))
+
         chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
         chats.add(Msg(2, texsImg, "img",1, senderImg,0, "09:00:11"))
         chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
@@ -50,32 +50,32 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
         chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
         chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
-        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
-        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
-        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
-        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+//        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
+//        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
+//        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
+//        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
 
         rv_chats.setHasFixedSize(true)
         rv_chats.layoutManager = LinearLayoutManager(this)
@@ -84,12 +84,53 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
 
+        // 전송버튼 클릭
         iv_send_chat.setOnClickListener {
-            chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-            chatAdapter.notifyItemInserted(chatAdapter.itemCount)
+            val t: String = et_msg_for_send.text.toString()
+            if (t != "") {
+                chats.add(Msg(12, et_msg_for_send.text.toString(),"text", 1, senderImg,0, "13:00:11"))
+                chatAdapter.notifyItemInserted(chatAdapter.itemCount)
 
-            rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+                rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+                et_msg_for_send.setText("")
+//                et_msg_for_send.clearFocus()
+            }
         }
+
+        // 키보드가 올라가면서 뷰가 전체적으로 밀리면서 recyclerView의 레이아웃 크키변경됨 => 이떄 뷰 스크롤을 가장 아래로 내린다
+        rv_chats.addOnLayoutChangeListener(View.OnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if (bottom < oldBottom) {
+                rv_chats.postDelayed(Runnable {
+                    rv_chats.smoothScrollToPosition(
+                        chatAdapter.itemCount - 1
+                    )
+                }, 100)
+            }
+        })
+
+//        rv_chats.setOnClickListener {
+//            et_msg_for_send.clearFocus()
+//        }
+//        iv_etcs_send.setOnClickListener {
+//            et_msg_for_send.clearFocus()
+//        }
+//
+//        // editText 포커스 해제
+//        et_msg_for_send.onFocusChangeListener =
+//            View.OnFocusChangeListener { view, hasFocus ->
+//                if (hasFocus) {
+//                } else {
+//                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//                    imm.hideSoftInputFromWindow(et_msg_for_send.windowToken, 0)
+//                }
+//
+//                rv_chats.postDelayed(
+//                    Runnable {
+//                        rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+//                    },
+//                    100
+//                )
+//            }
 
     }
 
