@@ -14,7 +14,7 @@ import com.example.chat.API.FriendDetail
 
 class Users: Fragment() {
     var fgUserAdapter: FgUserAdapter? = null
-    var rv_friend: RecyclerView? = null
+    private var rv_friend: RecyclerView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class Users: Fragment() {
         rv_friend?.setHasFixedSize(true)
 
         val linearLayoutManager = LinearLayoutManager(activity)
-        rv_friend?.layoutManager = LinearLayoutManager(activity)
+        rv_friend?.layoutManager = linearLayoutManager
 
         val vItemDecoration = DividerItemDecoration(
             rv_friend?.context,
@@ -62,8 +62,6 @@ class Users: Fragment() {
         data4.add(Friend(6, "2020-09-09", 1, 1, 2, FriendDetail("email1", "birth", "m", "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo","안녕", "")))
         data4.add(Friend(7, "2020-09-09", 1, 1, 2, FriendDetail("email2", "birth", "m", "https://avatars0.githubusercontent.com/u/15213202?s=64&v=4","안녕1", "테스트")))
         data4.add(Friend(8, "2020-09-09", 1, 1, 2, FriendDetail("email2", "birth", "m", "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo","안녕2", "")))
-        data4.add(Friend(9, "2020-09-09", 1, 1, 2, FriendDetail("email2", "birth", "m", "https://avatars0.githubusercontent.com/u/15213202?s=64&v=4","안녕3", "")))
-        data4.add(Friend(10, "2020-09-09", 1, 1, 2, FriendDetail("email2", "birth", "m", "https://avatars0.githubusercontent.com/u/15213202?s=64&v=4","안녕4", "")))
 
         data.add(data0)
         data.add(data1)

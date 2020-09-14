@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chat.API.Friend
@@ -46,7 +47,8 @@ class FgUserAdapter(
         } else {
             (holder as FriendViewHolder).friendProfileTitle_tv.text = name
             holder.friendsProfile_rv.setHasFixedSize(true)
-            holder.friendsProfile_rv.layoutManager = LinearLayoutManager(activity)
+            val linearLayoutManager = LinearLayoutManager(activity)
+            holder.friendsProfile_rv.layoutManager = linearLayoutManager
             holder.friendsProfile_rv.adapter = FgUserSectionAdpater(friend)
 
             holder.friendProfileTitle_tv.setOnClickListener {
@@ -56,7 +58,7 @@ class FgUserAdapter(
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val myProfile_rv = itemView.findViewById<RecyclerView>(R.id.my_profile)
+        val myProfile_rv: RecyclerView = itemView.findViewById<RecyclerView>(R.id.my_profile)
     }
 
     class FriendViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

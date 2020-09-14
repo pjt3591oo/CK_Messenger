@@ -31,7 +31,6 @@ class FgChatAdapter(val roomList: ArrayList<Room>): RecyclerView.Adapter<FgChatA
         holder.chatCnt.text = roomList[position].chatCnt.toString()
 
         holder.view.setOnClickListener {
-            Log.i("[VIEW]", "Open ?")
             var i = Intent(it.context, ChatActivity::class.java)
             i.putExtra("roomName", roomList[position].name)
             it.context.startActivity(i)

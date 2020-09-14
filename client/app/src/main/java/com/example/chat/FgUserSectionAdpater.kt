@@ -51,11 +51,15 @@ class FgUserSectionAdpater(val friendList: ArrayList<Friend>): RecyclerView.Adap
             val isMyProfile: Boolean = friendList[position].id == 1
 
             var movedIntent: Intent = if (isMyProfile) {
-                Intent(it.context, MyProfileActivity::class.java)
+                var i = Intent(it.context, MyProfileActivity::class.java)
+                i
             } else {
-                Intent(it.context, FriendProfileActivity::class.java)
+                var i = Intent(it.context, FriendProfileActivity::class.java)
+                i
             }
-
+            movedIntent.putExtra("roomName", friendList[position].friend.email)
+            movedIntent.putExtra("profileImg", friendList[position].friend.profile_img)
+            movedIntent.putExtra("userStatusMsg", friendList[position].friend.msg)
             it.context.startActivity(movedIntent)
         }
     }

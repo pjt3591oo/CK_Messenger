@@ -8,8 +8,9 @@ import android.view.*
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
+import androidx.core.view.GravityCompat
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
-
+import kotlinx.android.synthetic.main.activity_chat.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -89,5 +90,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
+        System.runFinalization()
+        System.exit(0)
     }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/chat_menu_layout_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#353739"
+    android:background="#454752"
     tools:context=".ChatActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
-            android:background="#393939"
+            android:background="#484A55"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

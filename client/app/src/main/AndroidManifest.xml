@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chat">
 
-    <!-- 네트워크 사용에 대한 퍼미션 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" /> <!-- 네트워크 사용에 대한 퍼미션 -->
     <uses-permission android:name="android.permission.INTERNET" />
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
 
     <application
         android:allowBackup="true"
@@ -13,34 +14,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-    >
-        <activity android:name=".MainActivity">
+        android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".SigninActivity"
+            android:windowSoftInputMode="adjustResize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
+        <activity android:name=".MainActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
         <activity
             android:name=".MyProfileActivity"
-            android:theme="@style/AppTheme"
             android:label="my profile"
-        />
-
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".FriendProfileActivity"
-            android:theme="@style/AppTheme"
             android:label="friend profile"
-        />
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ChatActivity"
-            android:theme="@style/AppTheme"
             android:label="Chatting"
-            />
-
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
