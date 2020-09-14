@@ -14,12 +14,16 @@ class SigninActivity : AppCompatActivity() {
         hideActionBar()
 
         btn_signin.setOnClickListener {
-            var intent: Intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            moveMainActivity()
         }
+
     }
 
-    fun hideActionBar () {
+    private fun moveMainActivity () {
+        var intent: Intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    private fun hideActionBar () {
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
     }
