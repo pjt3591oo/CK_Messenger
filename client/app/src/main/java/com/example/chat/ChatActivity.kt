@@ -151,7 +151,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private fun editClick () {
         et_msg_for_send.setOnClickListener {
             this?.window?.setSoftInputMode(SOFT_INPUT_ADJUST_PAN)
-            v_emoji.visibility = View.GONE
+//            v_emoji.visibility = View.GONE
         }
     }
 
@@ -179,10 +179,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         if (chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
             chat_menu_layout_drawer.closeDrawers()
             return
-        } else if (isKeyboardShow()){
-            v_emoji.visibility = View.GONE
-//            hideKeyboard(et_msg_for_send)
-            return
         }  else if (v_emoji.visibility == View.VISIBLE){
             v_emoji.visibility = View.GONE
             return
@@ -192,5 +188,4 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }
 
     }
-
 }
