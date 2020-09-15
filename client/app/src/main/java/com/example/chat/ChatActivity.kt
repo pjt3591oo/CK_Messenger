@@ -2,13 +2,16 @@ package com.example.chat
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -18,11 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat.API.Msg
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
-import android.view.View as View
 
 
 class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var originHeight = -1
+
     @SuppressLint("LongLogTag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +90,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             }
         })
 
+
         addBtnClick()
         editClick()
     }
@@ -128,7 +132,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     // 우측에 튀어나온 메뉴 아이템 이벤트 리스너
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        Toast.makeText( applicationContext, "Clicked: ${p0} ", Toast.LENGTH_SHORT).show()
+        Toast.makeText( applicationContext, "Clicked: $p0 ", Toast.LENGTH_SHORT).show()
         return false
     }
 
@@ -136,8 +140,8 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         iv_etcs_send.setOnClickListener {
             if (isKeyboardShow() || v_emoji.visibility == View.GONE) {
-                v_emoji.visibility = View.VISIBLE
                 hideKeyboard(et_msg_for_send)
+                v_emoji.visibility = View.VISIBLE
             } else {
                 v_emoji.visibility = View.GONE
             }
@@ -145,15 +149,9 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun editClick () {
-
         et_msg_for_send.setOnClickListener {
             this?.window?.setSoftInputMode(SOFT_INPUT_ADJUST_PAN)
-            showKeyboard(et_msg_for_send)
-
-//            val kHeight = getKeyboardHeight(layout_root_chat)
-//            layout_root_chat.layoutParams.height = kHeight
-
-            v_emoji.visibility = View.VISIBLE
+            v_emoji.visibility = View.GONE
         }
     }
 
@@ -183,7 +181,10 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             return
         } else if (isKeyboardShow()){
             v_emoji.visibility = View.GONE
-            hideKeyboard(layout_root_chat)
+//            hideKeyboard(et_msg_for_send)
+            return
+        }  else if (v_emoji.visibility == View.VISIBLE){
+            v_emoji.visibility = View.GONE
             return
         } else {
             super.onBackPressed()
@@ -191,13 +192,5 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         }
 
     }
-    private fun getKeyboardHeight(targetView: View): Int {
-        if (targetView.height > originHeight) {
-            originHeight = targetView.height
-        }
-        val visibleFrameSize = Rect()
-        layout_root_chat.getWindowVisibleDisplayFrame(visibleFrameSize)
-        val visibleFrameHeight = visibleFrameSize.bottom - visibleFrameSize.top
-        return originHeight - visibleFrameHeight
-    }
+
 }
