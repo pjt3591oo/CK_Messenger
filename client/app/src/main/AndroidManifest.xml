@@ -46,7 +46,10 @@
         <activity
             android:name=".ChatActivity"
             android:label="Chatting"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize"
+            />
     </application>
 
 </manifest>
+<!--    android:windowSoftInputMode="adjustNothing"-->

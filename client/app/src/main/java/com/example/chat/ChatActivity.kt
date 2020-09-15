@@ -1,11 +1,15 @@
 package com.example.chat
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat.API.Msg
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
+import android.view.View as View
 
 
 class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    private var originHeight = -1
+    @SuppressLint("LongLogTag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -39,7 +45,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val texsImg:String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
         val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
 
-
         chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
         chats.add(Msg(2, texsImg, "img",1, senderImg,0, "09:00:11"))
         chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
@@ -52,34 +57,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
         chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
         chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(2, texsImg, "img",2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
-//        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
-//        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
-//        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-//        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
 
-        rv_chats.setHasFixedSize(true)
         rv_chats.layoutManager = LinearLayoutManager(this)
         var chatAdapter = ChatAdapter(chats, this)
         rv_chats.adapter = chatAdapter
@@ -108,7 +86,11 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 }, 100)
             }
         })
+
+        addBtnClick()
+        editClick()
     }
+
 
     override fun finish() {
         super.finish()
@@ -132,8 +114,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_menu -> {
-                Log.d("[EVENT] actionbar", "click menu item by actionbar from ChatActivity")
-                Log.d("[EVENT] actionbar", (chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)).toString())
                 if(!chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
                     chat_menu_layout_drawer.openDrawer(GravityCompat.END)
                 } else {
@@ -152,6 +132,47 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return false
     }
 
+    private fun addBtnClick () {
+
+        iv_etcs_send.setOnClickListener {
+            if (isKeyboardShow() || v_emoji.visibility == View.GONE) {
+                v_emoji.visibility = View.VISIBLE
+                hideKeyboard(et_msg_for_send)
+            } else {
+                v_emoji.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun editClick () {
+
+        et_msg_for_send.setOnClickListener {
+            this?.window?.setSoftInputMode(SOFT_INPUT_ADJUST_PAN)
+            showKeyboard(et_msg_for_send)
+
+//            val kHeight = getKeyboardHeight(layout_root_chat)
+//            layout_root_chat.layoutParams.height = kHeight
+
+            v_emoji.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+    private fun showKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 1)
+    }
+
+    private fun isKeyboardShow(): Boolean {
+        val visibleBounds = Rect()
+        layout_root_chat.getWindowVisibleDisplayFrame(visibleBounds)
+        val heightDiff = layout_root_chat.height - visibleBounds.height()
+        return heightDiff > 0
+    }
+
     private fun closeAnimation() {
         overridePendingTransition( R.anim.slide_out_static, R.anim.slide_out_bottom );
     }
@@ -159,8 +180,24 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onBackPressed() {
         if (chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
             chat_menu_layout_drawer.closeDrawers()
+            return
+        } else if (isKeyboardShow()){
+            v_emoji.visibility = View.GONE
+            hideKeyboard(layout_root_chat)
+            return
         } else {
             super.onBackPressed()
+            return
         }
+
+    }
+    private fun getKeyboardHeight(targetView: View): Int {
+        if (targetView.height > originHeight) {
+            originHeight = targetView.height
+        }
+        val visibleFrameSize = Rect()
+        layout_root_chat.getWindowVisibleDisplayFrame(visibleFrameSize)
+        val visibleFrameHeight = visibleFrameSize.bottom - visibleFrameSize.top
+        return originHeight - visibleFrameHeight
     }
 }
