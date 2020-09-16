@@ -21,6 +21,8 @@
             android:layout_marginEnd="2dp"
             android:background="#484A55"
             android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             app:layout_constraintBottom_toTopOf="@+id/v_emoji"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -39,8 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:inputType="text"
                 android:textColor="#FFFFFF" />
 

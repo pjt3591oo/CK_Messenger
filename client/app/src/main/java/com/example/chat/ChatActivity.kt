@@ -2,16 +2,12 @@ package com.example.chat
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
-import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -142,6 +138,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             if (isKeyboardShow() || v_emoji.visibility == View.GONE) {
                 hideKeyboard(et_msg_for_send)
                 v_emoji.visibility = View.VISIBLE
+                et_msg_for_send.requestFocus()
             } else {
                 v_emoji.visibility = View.GONE
             }
@@ -151,7 +148,13 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private fun editClick () {
         et_msg_for_send.setOnClickListener {
             this?.window?.setSoftInputMode(SOFT_INPUT_ADJUST_PAN)
-//            v_emoji.visibility = View.GONE
+            v_emoji.visibility = View.VISIBLE
+        }
+
+        et_msg_for_send.setOnKeyListener { v, keyCode, event ->
+            Log.d("test", "tesd13234")
+
+            true
         }
     }
 
@@ -176,6 +179,8 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
     override fun onBackPressed() {
+        Log.d("test", "test")
+
         if (chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
             chat_menu_layout_drawer.closeDrawers()
             return
@@ -186,6 +191,16 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             super.onBackPressed()
             return
         }
+    }
 
+    fun onKeyPreIme(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.d("test", "123")
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+        } else if (keyCode == KeyEvent.KEYCODE_MENU) {
+            // Eat the event
+            return true
+        }
+        return false
     }
 }
