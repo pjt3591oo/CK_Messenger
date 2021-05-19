@@ -1,9 +1,9 @@
 package com.example.chat
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -15,9 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat.API.Msg
+
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
+import java.io.IOException
 
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 
 class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var originHeight = -1
@@ -34,7 +38,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val intent = intent
         actionBar?.title = intent.extras?.getString("roomName") // 액션바 타이틀
 
-        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_static );
+        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_static);
 
         // 우측에 튀어나온 메뉴 아이템 클릭시 onNavigationITemSelected 호출하도록 설정
         chat_menu_view.setNavigationItemSelectedListener(this)
@@ -44,18 +48,18 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         val texsImg:String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
         val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
 
-        chats.add(Msg(1, texsImg, "img",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(2, texsImg, "img",1, senderImg,0, "09:00:11"))
-        chats.add(Msg(3, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(4, texsImg,"img", 1, senderImg,0, "13:00:11"))
-        chats.add(Msg(5, "안녕하세요","text", 2, senderImg,1, "17:00:11"))
-        chats.add(Msg(6, texsImg,"img", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(7, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(8, "오늘 날씨가 좋네요","text", 2, senderImg,0, "13:00:11"))
-        chats.add(Msg(9, "안녕하세요", "text",2, senderImg,1, "17:00:11"))
-        chats.add(Msg(10, "반갑습니다","text", 2, senderImg,0, "09:00:11"))
-        chats.add(Msg(11, "반가워요~", "text",2, senderImg,1, "17:01:11"))
-        chats.add(Msg(12, "오늘 날씨가 좋네요","text", 1, senderImg,0, "13:00:11"))
+        chats.add(Msg(1, texsImg, "img", 2, senderImg, 1, "17:00:11"))
+        chats.add(Msg(2, texsImg, "img", 1, senderImg, 0, "09:00:11"))
+        chats.add(Msg(3, "반가워요~", "text", 2, senderImg, 1, "17:01:11"))
+        chats.add(Msg(4, texsImg, "img", 1, senderImg, 0, "13:00:11"))
+        chats.add(Msg(5, "안녕하세요", "text", 2, senderImg, 1, "17:00:11"))
+        chats.add(Msg(6, texsImg, "img", 2, senderImg, 0, "09:00:11"))
+        chats.add(Msg(7, "반가워요~", "text", 2, senderImg, 1, "17:01:11"))
+        chats.add(Msg(8, "오늘 날씨가 좋네요", "text", 2, senderImg, 0, "13:00:11"))
+        chats.add(Msg(9, "안녕하세요", "text", 2, senderImg, 1, "17:00:11"))
+        chats.add(Msg(10, "반갑습니다", "text", 2, senderImg, 0, "09:00:11"))
+        chats.add(Msg(11, "반가워요~", "text", 2, senderImg, 1, "17:01:11"))
+        chats.add(Msg(12, "오늘 날씨가 좋네요", "text", 1, senderImg, 0, "13:00:11"))
 
         rv_chats.layoutManager = LinearLayoutManager(this)
         var chatAdapter = ChatAdapter(chats, this)
@@ -65,13 +69,19 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
         // 전송버튼 클릭
         iv_send_chat.setOnClickListener {
-            val t: String = et_msg_for_send.text.toString()
-            if (t != "") {
-                chats.add(Msg(12, et_msg_for_send.text.toString(),"text", 1, senderImg,0, "13:00:11"))
+            val msg: String = et_msg_for_send.text.toString()
+            Log.d("[EVENT] CLICK: ", msg)
+
+            if (msg != "") {
+                chats.add(Msg(12, msg, "text", 1, senderImg, 0, "13:00:11"))
                 chatAdapter.notifyItemInserted(chatAdapter.itemCount)
 
                 rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
                 et_msg_for_send.setText("")
+
+                Log.d("[EVENT] CLICK: ", msg)
+
+                ADID_Task(chats, chatAdapter)
             }
         }
 
@@ -86,10 +96,49 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             }
         })
 
-
         addBtnClick()
         editClick()
     }
+
+    private fun ADID_Task(chats: ArrayList<Msg>, chatAdapter: ChatAdapter) {
+        // TODO: AsyncTask 대체를 머로 해야되지??.....
+        val task: AsyncTask<Void?, Void?, String?> = @SuppressLint("StaticFieldLeak")
+        object : AsyncTask<Void?, Void?, String?>() {
+            override fun onPostExecute(adid: String?) {
+                val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
+                val msg: String = adid.toString()
+
+                chats.add(Msg(12, msg, "text", 2, senderImg, 0, "13:00:11"))
+                chatAdapter.notifyItemInserted(chatAdapter.itemCount)
+
+                rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
+            }
+
+            override fun doInBackground(vararg p0: Void?): String? {
+                val adid: String = _getAdid(applicationContext)
+                Log.d("[EVENT] ADID", adid)
+                return adid
+            }
+        }
+        task.execute()
+    }
+
+    fun _getAdid(context: android.content.Context): String {
+        var adInfo: AdvertisingIdClient.Info? = null
+
+        try {
+            adInfo = AdvertisingIdClient.getAdvertisingIdInfo(applicationContext)
+        } catch (e: IOException) {
+
+        } catch (e: GooglePlayServicesNotAvailableException) {
+
+        }
+        val id = adInfo!!.id
+        val isLAT = adInfo!!.isLimitAdTrackingEnabled
+
+        return id
+    }
+
 
 
     override fun finish() {
@@ -114,7 +163,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_menu -> {
-                if(!chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
+                if (!chat_menu_layout_drawer.isDrawerOpen(GravityCompat.END)) {
                     chat_menu_layout_drawer.openDrawer(GravityCompat.END)
                 } else {
                     chat_menu_layout_drawer.closeDrawers()
@@ -128,7 +177,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     // 우측에 튀어나온 메뉴 아이템 이벤트 리스너
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        Toast.makeText( applicationContext, "Clicked: $p0 ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "Clicked: $p0 ", Toast.LENGTH_SHORT).show()
         return false
     }
 
@@ -159,11 +208,11 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
     private fun showKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 1)
     }
 
@@ -175,7 +224,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
     private fun closeAnimation() {
-        overridePendingTransition( R.anim.slide_out_static, R.anim.slide_out_bottom );
+        overridePendingTransition(R.anim.slide_out_static, R.anim.slide_out_bottom);
     }
 
     override fun onBackPressed() {

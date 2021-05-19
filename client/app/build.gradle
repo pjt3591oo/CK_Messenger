@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.wear:wear:1.0.0'
+    implementation 'androidx.ads:ads-identifier:1.0.0-alpha04'
 
     testImplementation 'junit:junit:4.12'
 
@@ -49,4 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
 
+    // ADID
+    implementation 'com.google.android.gms:play-services-ads-lite:11.8.0'
 }
