@@ -4,7 +4,7 @@ data class Msg(
     val id: Int,
     val msg: String,
     // text, img, etc
-     val msgType: String,
+    val msgType: String,
     val sender: Int,
 
     val senderImg: String,

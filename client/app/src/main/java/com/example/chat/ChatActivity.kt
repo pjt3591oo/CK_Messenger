@@ -1,9 +1,7 @@
 package com.example.chat
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Rect
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -18,10 +16,11 @@ import com.example.chat.API.Msg
 
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_chat.*
-import java.io.IOException
 
-import com.google.android.gms.ads.identifier.AdvertisingIdClient
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+//import com.google.android.gms.ads.identifier.AdvertisingIdClient
+//import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+
+import com.example.chat.AD_SDK.*
 
 class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var originHeight = -1
@@ -73,7 +72,8 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
             Log.d("[EVENT] CLICK: ", msg)
 
             if (msg != "") {
-                chats.add(Msg(12, msg, "text", 1, senderImg, 0, "13:00:11"))
+                val m: Msg = Msg(12, msg, "text", 1, senderImg, 0, "13:00:11")
+                chats.add(m)
                 chatAdapter.notifyItemInserted(chatAdapter.itemCount)
 
                 rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
@@ -81,7 +81,7 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
                 Log.d("[EVENT] CLICK: ", msg)
 
-                ADID_Task(chats, chatAdapter)
+                ADID<Msg>(applicationContext, "API_KEY").execute("send", m)
             }
         }
 
@@ -99,47 +99,6 @@ class ChatActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         addBtnClick()
         editClick()
     }
-
-    private fun ADID_Task(chats: ArrayList<Msg>, chatAdapter: ChatAdapter) {
-        // TODO: AsyncTask 대체를 머로 해야되지??.....
-        val task: AsyncTask<Void?, Void?, String?> = @SuppressLint("StaticFieldLeak")
-        object : AsyncTask<Void?, Void?, String?>() {
-            override fun onPostExecute(adid: String?) {
-                val senderImg: String = "https://lh3.googleusercontent.com/ogw/ADGmqu_KF5ZFGmysQOIgIfY5ZolLw21UFOgJgP7Euk3j=s32-c-mo"
-                val msg: String = adid.toString()
-
-                chats.add(Msg(12, msg, "text", 2, senderImg, 0, "13:00:11"))
-                chatAdapter.notifyItemInserted(chatAdapter.itemCount)
-
-                rv_chats.smoothScrollToPosition(chatAdapter.itemCount)
-            }
-
-            override fun doInBackground(vararg p0: Void?): String? {
-                val adid: String = _getAdid(applicationContext)
-                Log.d("[EVENT] ADID", adid)
-                return adid
-            }
-        }
-        task.execute()
-    }
-
-    fun _getAdid(context: android.content.Context): String {
-        var adInfo: AdvertisingIdClient.Info? = null
-
-        try {
-            adInfo = AdvertisingIdClient.getAdvertisingIdInfo(applicationContext)
-        } catch (e: IOException) {
-
-        } catch (e: GooglePlayServicesNotAvailableException) {
-
-        }
-        val id = adInfo!!.id
-        val isLAT = adInfo!!.isLimitAdTrackingEnabled
-
-        return id
-    }
-
-
 
     override fun finish() {
         super.finish()
